@@ -81,3 +81,44 @@ src
 6. 前端根据返回结果更新页面显示。
 
 通过以上的代码结构和交互流程，能够实现地理信息数据管理平台的各项功能，包括用户管理、数据管理、地图展示、查询分析和数据共享等。
+
+```
+geofrontend                            
+├─ public                              
+│  └─ favicon.ico                      
+├─ src                                 
+│  ├─ assets                           
+│  │  ├─ base.css                      
+│  │  ├─ logo.svg                      
+│  │  └─ main.css                      
+│  ├─ components                       
+│  │  ├─ BackupRecordManagement.vue    
+│  │  ├─ GeographicInfoManagement.vue  
+│  │  ├─ MapConfigManagement.vue       
+│  │  ├─ PermissionManagement.vue      
+│  │  ├─ QueryRecordManagement.vue     
+│  │  ├─ SharingRecordManagement.vue   
+│  │  └─ UserManagement.vue            
+│  ├─ route                            
+│  │  └─ index.js                      
+│  ├─ store                            
+│  │  └─ index.js                      
+│  ├─ views                            
+│  │  ├─ BackupRecordPage.vue          
+│  │  ├─ GeographicInfoPage.vue        
+│  │  ├─ Home.vue                      
+│  │  ├─ Login.vue                     
+│  │  ├─ MapConfigPage.vue             
+│  │  ├─ PermissionPage.vue            
+│  │  ├─ QueryRecordPage.vue           
+│  │  ├─ SharingRecordPage.vue         
+│  │  └─ UserPage.vue                  
+│  ├─ App.vue                          
+│  └─ main.js                          
+├─ index.html                          
+├─ jsconfig.json                       
+├─ package-lock.json                   
+├─ package.json                        
+├─ README.md                           
+└─ vite.config.js                      
+```
