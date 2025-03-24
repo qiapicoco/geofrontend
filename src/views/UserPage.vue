@@ -1,13 +1,21 @@
 <template>
-  <div>
+  <div class="user-page-container">
     <UserManagement />
   </div>
 </template>
 
-<script setup>
-import UserManagement from '../components/UserManagement.vue';
+<script>
+import UserManagement from '../components/UserManagement.vue'
+
+export default {
+  components: {
+    UserManagement
+  }
+}
 </script>
 
 <style scoped>
-/* 用户管理页面特定的样式 */
+.user-page-container {
+  padding: 20px;
+}
 </style>

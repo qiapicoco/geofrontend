@@ -1,31 +1,34 @@
-import { createStore } from 'vuex';
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-const store = createStore({
-    state() {
-        return {
-            user: null
-        };
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+    state: {
+        user: null,
+        // 其他状态可以根据需要添加
     },
     mutations: {
         setUser(state, user) {
-            state.user = user;
+            state.user = user
         }
     },
     actions: {
+        // 可以在这里定义异步操作，如登录、获取用户信息等
         login({ commit }, user) {
-            // 这里可以添加登录逻辑，如发送请求到后端验证用户名和密码
-            // 验证通过后更新 store 中的用户信息
-            commit('setUser', user);
+            // 假设这里会与后端交互验证用户信息并获取 token
+            // 然后将用户信息存储到 state 中
+            commit('setUser', user)
+            localStorage.setItem('token', 'your_token_here') // 模拟设置 token
         },
         logout({ commit }) {
-            commit('setUser', null);
+            commit('setUser', null)
+            localStorage.removeItem('token')
         }
     },
     getters: {
-        isLoggedIn(state) {
-            return state.user !== null;
-        }
+        getUser: state => state.user
     }
-});
+})
 
-export default store;
+export default store

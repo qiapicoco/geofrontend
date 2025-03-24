@@ -1,21 +1,20 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view></router-view>
   </div>
 </template>
 
-<script setup>
-// 这里可以添加根组件的逻辑代码
+<script>
+export default {
+  name: 'App'
+}
 </script>
 
 <style>
-/* 根组件的全局样式 */
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+/* 可以在这里添加全局样式重置等 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 </style>
