@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -48,39 +50,56 @@ export default {
     }
   },
   created() {
-    // 模拟从后端获取用户列表
-    this.getUsers()
+    this.getUsers();
   },
   methods: {
-    getUsers() {
-      // 这里调用后端接口获取用户列表
-      // 假设接口返回的数据格式为 { data: [user1, user2,...] }
-      const mockUsers = [
-        { userId: 1, username: 'user1', password: 'password1' },
-        { userId: 2, username: 'user2', password: 'password2' }
-      ]
-      this.users = mockUsers
+    async getUsers() {
+      try {
+        const response = await axios.get('/api/users');
+        this.users = response.data;
+      } catch (error) {
+        console.error('获取用户列表失败', error);
+      }
     },
-    addUser() {
-      // 这里调用后端接口添加用户
-      // 假设接口会返回添加后的用户信息
-      const newUser = { username: this.newUsername, password: this.newPassword }
-      // 模拟添加成功后更新用户列表
-      this.users.push(newUser)
-      this.showAddUserModal = false
-      this.newUsername = ''
-      this.newPassword = ''
+    async addUser() {
+      try {
+        const response = await axios.post('/api/users', {
+          username: this.newUsername,
+          password: this.newPassword
+        });
+        this.users.push(response.data);
+        this.showAddUserModal = false;
+        this.newUsername = '';
+        this.newPassword = '';
+      } catch (error) {
+        console.error('添加用户失败', error);
+      }
     },
-    editUser(user) {
-      // 这里实现编辑用户的逻辑，如弹出编辑模态框等
-      console.log('编辑用户:', user)
+    async editUser(user) {
+      // 弹出编辑模态框，这里可以使用Element UI等组件库实现更友好的交互
+      const newUsername = prompt('请输入新的用户名', user.username);
+      if (newUsername) {
+        try {
+          await axios.put(`/api/users/${user.userId}`, {
+            username: newUsername
+          });
+          user.username = newUsername;
+        } catch (error) {
+          console.error('编辑用户失败', error);
+        }
+      }
     },
-    deleteUser(user) {
-      // 这里调用后端接口删除用户
-      // 假设接口会返回删除成功的状态
-      const index = this.users.indexOf(user)
-      if (index > -1) {
-        this.users.splice(index, 1)
+    async deleteUser(user) {
+      if (confirm('确定要删除该用户吗？')) {
+        try {
+          await axios.delete(`/api/users/${user.userId}`);
+          const index = this.users.indexOf(user);
+          if (index > -1) {
+            this.users.splice(index, 1);
+          }
+        } catch (error) {
+          console.error('删除用户失败', error);
+        }
       }
     }
   }

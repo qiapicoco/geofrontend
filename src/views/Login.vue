@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -20,12 +22,23 @@ export default {
     }
   },
   methods: {
-    login() {
-      // 这里可以调用后端接口进行登录验证
-      // 假设后端返回用户信息
-      const user = { username: this.username, role: 'user' }
-      this.$store.dispatch('login', user)
-      this.$router.push('/home')
+    async login() {
+      try {
+        const response = await axios.post('/api/login', {
+          username: this.username,
+          password: this.password
+        });
+        if (response.data.token) {
+          this.$store.dispatch('login', response.data.user);
+          localStorage.setItem('token', response.data.token);
+          this.$router.push('/home');
+        } else {
+          alert('登录失败，请检查用户名和密码');
+        }
+      } catch (error) {
+        console.error('登录失败', error);
+        alert('登录失败，请检查网络连接或联系管理员');
+      }
     }
   }
 }

@@ -1,90 +1,65 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Login from '../views/Login.vue'
-import Home from '../views/Home.vue'
-import UserPage from '../views/UserPage.vue'
-import PermissionPage from '../views/PermissionPage.vue'
-import GeographicInfoPage from '../views/GeographicInfoPage.vue'
-import BackupRecordPage from '../views/BackupRecordPage.vue'
-import MapConfigPage from '../views/MapConfigPage.vue'
-import QueryRecordPage from '../views/QueryRecordPage.vue'
-import SharingRecordPage from '../views/SharingRecordPage.vue'
-
-Vue.use(VueRouter)
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '@/views/Home.vue';
+import Login from '@/views/Login.vue';
+import BackupRecordPage from '@/views/BackupRecordPage.vue';
+import GeographicInfoPage from '@/views/GeographicInfoPage.vue';
+import MapConfigPage from '@/views/MapConfigPage.vue';
+import PermissionPage from '@/views/PermissionPage.vue';
+import QueryRecordPage from '@/views/QueryRecordPage.vue';
+import SharingRecordPage from '@/views/SharingRecordPage.vue';
+import UserPage from '@/views/UserPage.vue';
 
 const routes = [
-    {
-        path: '/',
-        name: 'Login',
-        component: Login
-    },
-    {
-        path: '/home',
-        name: 'Home',
-        component: Home,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/user',
-        name: 'UserPage',
-        component: UserPage,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/permission',
-        name: 'PermissionPage',
-        component: PermissionPage,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/geographic-info',
-        name: 'GeographicInfoPage',
-        component: GeographicInfoPage,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/backup-record',
-        name: 'BackupRecordPage',
-        component: BackupRecordPage,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/map-config',
-        name: 'MapConfigPage',
-        component: MapConfigPage,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/query-record',
-        name: 'QueryRecordPage',
-        component: QueryRecordPage,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/sharing-record',
-        name: 'SharingRecordPage',
-        component: SharingRecordPage,
-        meta: { requiresAuth: true }
-    }
-]
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/backup-record',
+    name: 'BackupRecordPage',
+    component: BackupRecordPage
+  },
+  {
+    path: '/geographic-info',
+    name: 'GeographicInfoPage',
+    component: GeographicInfoPage
+  },
+  {
+    path: '/map-config',
+    name: 'MapConfigPage',
+    component: MapConfigPage
+  },
+  {
+    path: '/permission',
+    name: 'PermissionPage',
+    component: PermissionPage
+  },
+  {
+    path: '/query-record',
+    name: 'QueryRecordPage',
+    component: QueryRecordPage
+  },
+  {
+    path: '/sharing-record',
+    name: 'SharingRecordPage',
+    component: SharingRecordPage
+  },
+  {
+    path: '/user',
+    name: 'UserPage',
+    component: UserPage
+  }
+];
 
-const router = new VueRouter({
-    mode: 'history',
-    routes
-})
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+});
 
-router.beforeEach((to, from, next) => {
-    // 简单的鉴权逻辑，假设登录后会在 localStorage 中存储 token
-    const token = localStorage.getItem('token')
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!token) {
-            next('/')
-        } else {
-            next()
-        }
-    } else {
-        next()
-    }
-})
-
-export default router
+export default router;
