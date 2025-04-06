@@ -86,6 +86,7 @@ src
 ```text
 node-v22.14.0
 @vue/cli@5.0.8
+vite@6.2.3
 npm@11.2.0
 vue@3.5.13
 webpack-cli@6.0.1

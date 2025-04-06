@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/src/assets/main.css" title="样式"/>
+     <tree path="/src/layouts" title="布局"/>
+     <tree path="/src/pages" title="页面"/>
+ </trees>
+<!--这是给目录树添加备注的xml文件，首先要下载插件【TreeInfotip】，可以给idea中的项目文件树添加备注 ，也可以给目录文件更换图标。在目录树选中文件，右键再点击【Add Description】>
